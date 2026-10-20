@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart - Demonstrativo de Gestão de Refeitório</title>
+  <style>
+    :root {
+      --bg-main: #0B2239; /* Azul escuro principal da Smart */
+      --bg-card: #132F4C; /* Azul dos cartões */
+      --primary: #D4AF37; /* Amarelo/Dourado Smart */
+      --accent: #008B8B;  /* Turquesa/Verde-azulado Smart */
+      --text-light: #F8FAFC;
+      --text-muted: #94A3B8;
+      --border: #1E3A5F;
+      --success: #22C55E;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-light);
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 1050px;
+      width: 100%;
+    }
+
+    header {
+      margin-bottom: 24px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      color: var(--text-light);
+    }
+
+    header h1 span {
+      color: var(--primary);
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 850px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .stat-box {
+      background: rgba(0, 139, 139, 0.15);
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+
+    .stat-box .title {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .stat-box .value {
+      font-size: 1.7rem;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .breakdown-list {
+      list-style: none;
+    }
+
+    .breakdown-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+
+    .breakdown-item:last-child {
+      border-bottom: none;
+    }
+
+    .badge {
+      background: rgba(212, 175, 55, 0.2);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .badge-fretado {
+      background: rgba(34, 197, 94, 0.2);
+      color: #4ade80;
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: rgba(11, 34, 57, 0.8);
+      color: var(--primary);
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .info-footer {
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: rgba(30, 58, 95, 0.4);
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1><span>SMART</span> | Demonstrativo de Gestão de Refeitório</h1>
+    <p>Painel demonstrativo integrado com os dados de transporte fretado e cardápio de carnes.</p>
+  </header>
+
+  <div class="grid">
+    <!-- Dados do Dia (Simulado da API) -->
+    <div class="card">
+      <h2>📋 Resumo Operacional de Hoje</h2>
+      
+      <div class="info-row">
+        <span>Proteína / Carne Principal:</span>
+        <strong style="color: var(--primary);">Carne Bovina (Bife Grelhado)</strong>
+      </div>
+      <div class="info-row">
+        <span>Porção Padrão Proteína Pronta:</span>
+        <strong>180g por pessoa</strong>
+      </div>
+      <div class="info-row">
+        <span>Passageiros Confirmados (Fretado):</span>
+        <span class="badge badge-fretado">135 pessoas (~98% pres.)</span>
+      </div>
+      <div class="info-row">
+        <span>Funcionários sem Fretado (Outros):</span>
+        <span class="badge">90 pessoas (~85% pres.)</span>
+      </div>
+      <div class="info-row">
+        <span>Presença Efetiva Estimada:</span>
+        <strong style="color: var(--success);">208 Refeições</strong>
+      </div>
+    </div>
+
+    <!-- Resultados da Estimativa -->
+    <div class="card">
+      <h2>📊 Necessidade de Insumos</h2>
+
+      <div class="stat-box">
+        <div class="title">Total de Refeições Previstas</div>
+        <div class="value">208 pessoas</div>
+      </div>
+
+      <div class="stat-box" style="border-left-color: var(--success); background: rgba(34, 197, 94, 0.1);">
+        <div class="title">Carne Necessária (Pronta / Crua Bruta)</div>
+        <div class="value" style="color: var(--success);">37.4 kg (Crua: 50.5 kg)</div>
+      </div>
+
+      <h3 style="font-size: 0.95rem; margin-top: 15px; margin-bottom: 8px; color: var(--text-light);">Acompanhamentos:</h3>
+      <ul class="breakdown-list">
+        <li class="breakdown-item">
+          <span>🍚 Arroz Cozido (~100g/p)</span>
+          <strong style="color: var(--primary);">20.8 kg</strong>
+        </li>
+        <li class="breakdown-item">
+          <span>🫘 Feijão Cozido (~100g/p)</span>
+          <strong style="color: var(--primary);">20.8 kg</strong>
+        </li>
+        <li class="breakdown-item">
+          <span>🥗 Salada & Guarnição (~120g/p)</span>
+          <strong style="color: var(--primary);">25.0 kg</strong>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Tabela com Histórico e Projeção do Mês -->
+  <div class="card table-container">
+    <h2>📅 Projeção de Consumo Mensal (Demonstrativo)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Dia/Semana</th>
+          <th>Fretado</th>
+          <th>Demais</th>
+          <th>Presença Total</th>
+          <th>Proteína / Carne do Dia</th>
+          <th>Qtd. Carne (kg)</th>
+          <th>Total Comida (kg)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Segunda (01)</strong></td>
+          <td>130</td>
+          <td>85</td>
+          <td><strong>202</strong></td>
+          <td>Carne Bovina (Bife)</td>
+          <td><strong style="color: var(--success);">36.4 kg</strong></td>
+          <td>101.0 kg</td>
+        </tr>
+        <tr>
+          <td><strong>Terça (02)</strong></td>
+          <td>135</td>
+          <td>90</td>
+          <td><strong>208</strong></td>
+          <td>Frango Grelhado</td>
+          <td><strong style="color: var(--success);">41.6 kg</strong></td>
+          <td>104.0 kg</td>
+        </tr>
+        <tr>
+          <td><strong>Quarta (03)</strong></td>
+          <td>132</td>
+          <td>88</td>
+          <td><strong>204</strong></td>
+          <td>Bisteca Suína</td>
+          <td><strong style="color: var(--success);">36.7 kg</strong></td>
+          <td>102.0 kg</td>
+        </tr>
+        <tr>
+          <td><strong>Quinta (04)</strong></td>
+          <td>128</td>
+          <td>80</td>
+          <td><strong>196</strong></td>
+          <td>Filé de Peixe</td>
+          <td><strong style="color: var(--success);">39.2 kg</strong></td>
+          <td>98.0 kg</td>
+        </tr>
+        <tr>
+          <td><strong>Sexta (05)</strong></td>
+          <td>120</td>
+          <td>75</td>
+          <td><strong>184</strong></td>
+          <td>Stroganoff Bovino</td>
+          <td><strong style="color: var(--success);">33.1 kg</strong></td>
+          <td>92.0 kg</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-footer">
+    💡 <strong>Modo Demonstrativo Smart:</strong> Os dados exibidos acima simulam a leitura automática vinda do sistema central de fretados e do cadastro de cardápio corporativo. Nenhuma edição manual é necessária nesta tela.
+  </div>
+</div>
+
+</body>
+</html>
